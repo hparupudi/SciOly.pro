@@ -1,3 +1,0 @@
-runtime: python313
-entrypoint: gunicorn -b :$PORT app:app
-
