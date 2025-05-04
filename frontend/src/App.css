@@ -1,9 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
-# linear-gradient(36deg, #f09, #3023AE, #0ff) 
+
 
 
 :root {
-  
   --primary: #00BFAD;
   --secondary: #18446C;
   --background: #111F3B;
@@ -13,8 +12,7 @@
   --secondary-hover: #4A88C2;
   --background-hover: #2B3851;
   --text-hover: #6B6B78;
-  --primary-gradient: linear-gradient(36deg, var(--primary), var(--secondary), var(--accent);
-  
+  --primary-gradient: linear-gradient(36deg, var(--primary), var(--secondary), var(--accent));
 }
 
 
@@ -92,7 +90,7 @@
   color: var(--text);
   background-color: #111F3B;
   border-radius: 20px;
-  border-color:aquamarine;
+  border-color: var(--primary);
   padding: 10px;
   width: 100%;
 }
@@ -150,7 +148,7 @@
   color: var(--text);
   background-color: #111F3B;
   border-radius: 20px;
-  border-color:aquamarine;
+  border-color: var(--primary);
   width: 200px;
   height: 50px;
   margin-left: 15%;
