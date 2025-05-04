@@ -1,4 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+# linear-gradient(36deg, #f09, #3023AE, #0ff) 
+
+
+:root {
+  
+  --primary: #00BFAD;
+  --secondary: #18446C;
+  --background: #111F3B;
+  --text: #EEEEFF;
+  --accent: #42C8F9;
+  --primary-hover: #D9D9D9;
+  --secondary-hover: #4A88C2;
+  --background-hover: #2B3851;
+  --text-hover: #6B6B78;
+  --primary-gradient: linear-gradient(36deg, var(--primary), var(--secondary), var(--accent);
+  
+}
+
 
 .main {
   background-image: linear-gradient( #111F3B, #1c5081);
@@ -18,10 +36,10 @@
 }
 
 .title {
-  font-family:"Poppins";
+  font-family: "Poppins";
   font-weight: 600;
   font-size: 48px;
-  color: #EEEEFF;
+  color: var(--text);
   margin-bottom: 0px;
   margin-top: 0px;
 }
@@ -30,7 +48,7 @@
   font-family:"Poppins";
   font-weight: 400;
   font-size: 20px;
-  color: #EEEEFF;
+  color: var(--text);
 }
 
 .navbar {
@@ -46,13 +64,13 @@
   font-family:"Poppins";
   font-weight: 400;
   font-size: 15px;
-  color: #EEEEFF;
+  color: var(--text);
 }
 
 .header-title {
   font-family: "Poppins";
   font-weight: 600;
-  color: #EEEEFF;
+  color: var(--text);
   margin-right: 50%;
   background: linear-gradient(to right, #ff5252, #00bcd4);
   -webkit-background-clip: text;
@@ -71,7 +89,7 @@
   font-family:"Poppins";
   font-weight: 400;
   font-size: 20px;
-  color: #EEEEFF;
+  color: var(--text);
   background-color: #111F3B;
   border-radius: 20px;
   border-color:aquamarine;
@@ -95,7 +113,7 @@
   font-family: "Poppins";
   font-weight: 600;
   font-size: 25px;
-  color: #EEEEFF;
+  color: var(--text);
   margin-bottom: 0%;
 }
 
@@ -129,7 +147,7 @@
   font-family:"Poppins";
   font-weight: 400;
   font-size: 20px;
-  color: #EEEEFF;
+  color: var(--text);
   background-color: #111F3B;
   border-radius: 20px;
   border-color:aquamarine;
@@ -142,7 +160,7 @@
   font-family: "Poppins";
   font-weight: 500;
   font-size: 16px;
-  color: #EEEEFF;
+  color: var(--text);
   margin-left: 5%;
 }
 
@@ -164,7 +182,7 @@
   border-top: 1px solid #ddd;
   font-family: "Poppins";
   font-weight: 500;
-  color: #EEEEFF;
+  color: var(--text);
 }
 
 .table-head-element {
@@ -174,7 +192,7 @@
   border-left: 1px solid #ddd;
   font-family: "Poppins";
   font-weight: 400;
-  color: #EEEEFF;
+  color: var(--text);
 }
 
 .table-input {
@@ -185,7 +203,7 @@
   margin: 0;
   font-family: "Poppins";
   font-weight: 500;
-  color: #EEEEFF;
+  color: var(--text);
   font-size: 15px;
 }
 
@@ -202,5 +220,5 @@
 .cipher-text {
   font-family: "Poppins";
   font-weight: 600;
-  color: #EEEEFF;
+  color: var(--text);
 }
