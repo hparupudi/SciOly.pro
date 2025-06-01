@@ -18,15 +18,26 @@
 }
 
 
+body {
+  overflow-x: hidden;
+}
 .main {
   background-image: linear-gradient( #111F3B, #1c5081);
   display: flex;
   width: 100vw;
   height: 100vh;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   justify-content: center;
 }
 
+.subcon {
+  margin-top:3%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
 .title-con {
   display: flex;
   flex-direction: column;
@@ -36,10 +47,10 @@
 }
 
 .title {
-  font-family: "Poppins";
+  font-family:"Poppins";
   font-weight: 600;
   font-size: 48px;
-  color: var(--text);
+  color: #EEEEFF;
   margin-bottom: 0px;
   margin-top: 0px;
 }
@@ -48,7 +59,7 @@
   font-family:"Poppins";
   font-weight: 400;
   font-size: 20px;
-  color: var(--text);
+  color: #EEEEFF;
 }
 
 .navbar {
@@ -64,13 +75,13 @@
   font-family:"Poppins";
   font-weight: 400;
   font-size: 15px;
-  color: var(--text);
+  color: #EEEEFF;
 }
 
 .header-title {
   font-family: "Poppins";
   font-weight: 600;
-  color: var(--text);
+  color: #EEEEFF;
   margin-right: 50%;
   background: linear-gradient(to right, #ff5252, #00bcd4);
   -webkit-background-clip: text;
@@ -89,12 +100,38 @@
   font-family:"Poppins";
   font-weight: 400;
   font-size: 20px;
-  color: var(--text);
+  color: #EEEEFF;
   background-color: #111F3B;
   border-radius: 20px;
   border-color:aquamarine;
   padding: 10px;
   width: 100%;
+}
+
+.white-page-title {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 48px;
+  color: white;
+  text-shadow:color-mix(in hsl shorter hue, color percentage, color percentage);
+  margin-bottom: 0%;
+  margin-top: 0%;
+}
+
+.coming-con {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.coming-title {
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 40px;
+  color: white;
+  text-shadow:color-mix(in hsl shorter hue, color percentage, color percentage);
+  margin-bottom: 0%;
+  margin-top: 3%;
 }
 
 .page-title {
@@ -113,7 +150,7 @@
   font-family: "Poppins";
   font-weight: 600;
   font-size: 25px;
-  color: var(--text);
+  color: #EEEEFF;
   margin-bottom: 0%;
 }
 
@@ -147,7 +184,7 @@
   font-family:"Poppins";
   font-weight: 400;
   font-size: 20px;
-  color: var(--text);
+  color: #EEEEFF;
   background-color: #111F3B;
   border-radius: 20px;
   border-color:aquamarine;
@@ -160,7 +197,7 @@
   font-family: "Poppins";
   font-weight: 500;
   font-size: 16px;
-  color: var(--text);
+  color: #EEEEFF;
   margin-left: 5%;
 }
 
@@ -182,7 +219,7 @@
   border-top: 1px solid #ddd;
   font-family: "Poppins";
   font-weight: 500;
-  color: var(--text);
+  color: #EEEEFF;
 }
 
 .table-head-element {
@@ -192,7 +229,7 @@
   border-left: 1px solid #ddd;
   font-family: "Poppins";
   font-weight: 400;
-  color: var(--text);
+  color: #EEEEFF;
 }
 
 .table-input {
@@ -203,7 +240,7 @@
   margin: 0;
   font-family: "Poppins";
   font-weight: 500;
-  color: var(--text);
+  color: #EEEEFF;
   font-size: 15px;
 }
 
@@ -220,5 +257,84 @@
 .cipher-text {
   font-family: "Poppins";
   font-weight: 600;
-  color: var(--text);
+  color: #EEEEFF;
+}
+
+.sidebar {
+  margin-top: 2%;
+  align-self: flex-start;
+  flex-direction: column;
+  background-color: #2B3851;
+  border-radius: 10px;
+  padding: 12px;
+  margin-left: 3%;
+  width: 50%;
+}
+
+.sidebar-con {
+  justify-self: left;
+}
+
+.mp-button {
+  margin-top: 5%;
+  font-family:"Poppins";
+  font-weight: 400;
+  font-size: 15px;
+  text-align: left;
+  color: #EEEEFF;
+  border-radius: 10px;
+  border-color:aquamarine;
+  padding: 10px;
+  width: 100%;
+}
+
+.event-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5;
+  padding: 10px;
+}
+
+.event-card {
+  height: 100%;
+  width: 80%;
+  background-color: #111F3B;
+  border-radius: 10px;
+  border: 1px solid aquamarine;  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  
+}
+
+.event-sc2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.question-text {
+  font-family:"Poppins";
+  font-weight: 600;
+  font-size: 20px;
+  color: white;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-left: 5%;
+}
+
+.event-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20%;
+  height: 60%;
+  border-radius: 10px;
+  font-family: "Poppins";
+  font-weight: 600;
+  font-size: 40px;
+  color: white;
+  background-color: #111F3B;
+  border: 2px solid aquamarine;
+  margin-right: 5%;
 }
