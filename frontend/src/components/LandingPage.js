@@ -11,8 +11,8 @@ function LandingPage() {
         <>
         <div className="navbar">
             <h1 className="header-title" onClick={() => navigate('/')}>scioly.pro</h1>
-            <p className="header-text">generate test</p>
-            <p onClick={() => navigate('/code')}className="header-text">practice questions</p>
+            <p onClick={() => navigate('/menu')} className="header-text">generate test</p>
+            <p onClick={() => navigate('/menu')} className="header-text">practice questions</p>
             <p className="header-text">sign up</p>
         </div>
         <div className="main">
@@ -24,10 +24,12 @@ function LandingPage() {
                 scioly.pro generates <b>comprehensive</b> practice tests & questions to give you that 
                 <i> extra competitive edge.</i></p>
                 <div className="button-con">
-                    <button className="lp-button">generate a test</button>
+                    <button className="lp-button"
+                    onClick={() => navigate('/menu')}
+                    >generate a test</button>
                     <button className="lp-button"
                     style={{"border-color": "blue"}}
-                    onClick={() => navigate('/code')}
+                    onClick={() => navigate('/menu')}
                     >individual practice questions</button>
                 </div>
             </div>
