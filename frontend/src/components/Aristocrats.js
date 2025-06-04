@@ -6,6 +6,12 @@ import qs from 'qs';
 function Aristocrats() {
 
     const navigate = useNavigate();
+    const location = useLocation();
+    const { state } = location;
+    const [title, setTitle] = useState(state.title) 
+    const [event, setEvent] = useState(state.event)
+    const [description, setDescription] = useState(state.description)
+
     const [type, setType] = useState('K1');
     const [difficulty, setDifficulty] = useState('Easy');
     const [aristo, setAristo] = useState(false);
@@ -16,6 +22,7 @@ function Aristocrats() {
     const [guessAlphabet, setGuessAlphabet] = useState(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']);
     const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
     const [updateLetter, setUpdateLetter] = useState(false)
+    
 
     useEffect(() => {
         const alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -68,15 +75,15 @@ function Aristocrats() {
         <>
         <div className="navbar">
             <h1 className="header-title" onClick={() => navigate('/')}>scioly.pro</h1>
-            <p className="header-text">generate test</p>
-            <p onClick={() => navigate('/code')}className="header-text">practice questions</p>
+            <p onClick={() => navigate('/menu')} className="header-text">generate test</p>
+            <p onClick={() => navigate('/menu')}className="header-text">practice questions</p>
             <p className="header-text">sign up</p>
         </div>
         <div className="main">
             <div className="title-con">
-                <p className="page-subtitle1">CodeBusters</p>
-                <h1 className="page-title">aristocrat generator</h1>
-                <p className="subtext">every letter is encoded with a seperate ciphertext letter</p>
+                <p className="page-subtitle1">{event}</p>
+                <h1 className="page-title">{title}</h1>
+                <p className="subtext">{description}</p>
                 <div className="settings-con">
                     <p className="settings-text">Customize Settings</p>
                     <div className="settings-subcon">
