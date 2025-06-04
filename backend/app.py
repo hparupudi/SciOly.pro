@@ -129,6 +129,7 @@ def generate_aristo():
                   "cipher_alphabet": cipheralphabet, "frequency": frequency}), 200
 
 @app.route('/mcq', methods=['GET', 'POST'])
+@cross_origin(suports_credentials=True)
 def generate_mcq():
   event = str(request.form.get('event'))
   index = "scioly" + event
@@ -139,10 +140,13 @@ def generate_mcq():
   embeddings = OpenAIEmbeddings(model="text-embedding-3-large", api_key=os.getenv('OpenAI_API'))
   vectorstore = PineconeVectorStore(index_name="sciolyastronomy", embedding=embeddings, pinecone_api_key=os.getenv('PINECONE_API_KEY'))
   docsearch = vectorstore.from_existing_index(index_name=index, embedding=embeddings)
-  
+
   class generateTest(BaseModel):
     question: str = Field(description='''Generate a multiple-choice question for the General Knowledge section 
                     of Astronomy. ''')
+    options: List[str] = Field(description='''Generate a list of the four answer options to the General Knowledge
+                               Astronomy multiple-choice question. Do not include the letters 
+                               'a, b, c, d' as part of the answer options.''')
     answer: str = Field(description='''Generate the corresponding answer to the multiple-choice question for
                     the General Knowledge section of Astrononmy.''')
   
@@ -163,8 +167,10 @@ def generate_mcq():
   chain = create_retrieval_chain(retriever, qa_chain)
   response = chain.invoke({'input': f'''Generate a General Knowledge astronomy multiple choice question
                           in the topic of {subtopic}.'''})
-  return response
+  
+  return jsonify({"response": str(response['answer'])}), 200
 
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True, port=8080)
+
