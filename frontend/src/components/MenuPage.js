@@ -5,17 +5,17 @@ import qs from 'qs';
 
 function MenuPage() {
     const navigate = useNavigate();
-    const options = ["All", "Codebusters", "Fermi Questions"];
+    const options = ["All", "Codebusters", "Astronomy"];
     const [buttons, setButtons] = useState([false, true, true]);
 
     const questionBanks = {
-      "aristocrat generator": "codebusters",
-      "fermi generator": "fermi questions",
+      "aristocrat generator": ["codebusters", "every letter is encoded with a seperate ciphertext letter"],
+      "general knowledge": ["astronomy", "stellar evolution & exoplanets"]
     }
 
     const paths = {
       "aristocrat generator": "/aristo",
-      "fermi generator": "fermi"
+      "general knowledge": "/mcq"
     }
 
     const handleUpdate = async (index) => {
@@ -29,8 +29,8 @@ function MenuPage() {
         <>
           <div className="navbar">
             <h1 className="header-title" onClick={() => navigate('/')}>scioly.pro</h1>
-            <p className="header-text">generate test</p>
-            <p onClick={() => navigate('/code')}className="header-text">practice questions</p>
+            <p onClick={() => navigate('/menu')} className="header-text">generate test</p>
+            <p onClick={() => navigate('/menu')}className="header-text">practice questions</p>
             <p className="header-text">sign up</p>
           </div>
           <div className="main">
@@ -56,9 +56,13 @@ function MenuPage() {
                       return (
                         <div className="event-card">
                           <h1 className="question-text">{key}</h1>
-                          <h1 style={{'fontWeight': 400}}className="question-text">{questionBanks[key]}</h1>
+                          <h1 style={{'fontWeight': 400}}className="question-text">{questionBanks[key][0]}</h1>
                           <div className="event-sc2">
-                            <button onClick={() => navigate(paths[key])} className="event-button">&rarr;</button>
+                            <button onClick={() => navigate(paths[key], 
+                              {state: {title: key, event: questionBanks[key][0], 
+                                description: questionBanks[key][1]
+                              }}
+                            )} className="event-button">&rarr;</button>
                           </div>
                         </div>
                       )
