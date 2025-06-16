@@ -17,18 +17,17 @@ function LandingPage() {
         </div>
         <div className="main">
             <div className="title-con">
-                <h1 className="title">Helping future scientists like <i>you</i></h1>
-                <h1 className="title"><span style={{'color': '#42C8F9'}}>triumph</span></h1>
-                <h1 className="title">in Science Olympiad competitions</h1>
+                <h1 className="title">Training future scientists like <i>you</i></h1>
+                <h1 className="title">to <span style={{'color': '#42C8F9'}}>triumph</span> in</h1>
+                <h1 className="title">Science Olympiad competitions</h1>
                 <p className="subtext">
                 scioly.pro generates <b>comprehensive</b> practice tests & questions to give you that 
                 <i> extra competitive edge.</i></p>
                 <div className="button-con">
-                    <button className="lp-button"
+                    <button className="btn-primary"
                     onClick={() => navigate('/menu')}
                     >generate a test</button>
-                    <button className="lp-button"
-                    style={{"border-color": "blue"}}
+                    <button className="btn-secondary"
                     onClick={() => navigate('/menu')}
                     >individual practice questions</button>
                 </div>
