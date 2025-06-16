@@ -363,3 +363,28 @@ body {
   border: 2px solid var(--primary);
   margin-right: 5%;
 }
+
+.mb2-con {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.mcq-button {
+  margin-top: 1%;
+  font-family:"Poppins";
+  font-weight: 400;
+  font-size: 20px;
+  color: #EEEEFF;
+  background-color: #111F3B;
+  border-radius: 20px;
+  border-color:aquamarine;
+  width: 200px;
+  height: 50px;
+}
+
+.answer-choice {
+  width: 80%;
+  height: 12%;
+  border-radius: 10px;
+}

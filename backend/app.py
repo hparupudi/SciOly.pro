@@ -8,6 +8,19 @@ from pydantic import BaseModel, Field
 import ast 
 import random
 from datetime import timedelta
+from langchain.prompts import PromptTemplate
+from langchain.chains import LLMChain
+from typing import List, Any
+from langchain.output_parsers import PydanticOutputParser
+from langchain.docstore.document import Document
+from langchain_pinecone import PineconeVectorStore
+from langchain_openai import OpenAIEmbeddings
+from langchain.chains import create_retrieval_chain, SequentialChain
+from langchain.chains.combine_documents import create_stuff_documents_chain
+from langchain_text_splitters import RecursiveCharacterTextSplitter
+import re
+import uuid
+from pinecone import Pinecone, ServerlessSpec
 
 app = Flask(__name__)
 app.secret_key = secrets.token_hex(16)
@@ -15,6 +28,13 @@ app.permanent_session_lifetime = timedelta(days=1)
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["http://localhost:3000/", "https://sciolypro.web.app/"]}})
 
 load_dotenv()
+
+topics_list = {
+    'astronomy': ["stellar classification", "spectral features and chemical composition", "luminosity",
+"blackbody radiation", "color index and H-R diagram transitions", "H I/II regions", "molecular clouds", 
+"protostars", "Herbig-Haro Objects", "T Tauri variables", "Herbig Ae/Be stars", "planet formation", "brown dwarfs", 
+"protoplanetary disks", "debris disks", "exoplanets"]
+}
 
 def encode_cipher(plaintext, plaintext_alphabet, cipher_alphabet):
   frequency = [0] * 26
@@ -108,5 +128,49 @@ def generate_aristo():
   return jsonify({"plaintext": plaintext, "ciphertext": ciphertext, "plain_alphabet": plain_alphabet, 
                   "cipher_alphabet": cipheralphabet, "frequency": frequency}), 200
 
+@app.route('/mcq', methods=['GET', 'POST'])
+@cross_origin(suports_credentials=True)
+def generate_mcq():
+  event = str(request.form.get('event'))
+  index = "scioly" + event
+  topic_list = topics_list[event]
+  subtopic = topic_list[random.randint(0, len(topics_list))]
+
+  llm = ChatOpenAI(model="o4-mini", api_key=os.getenv('OpenAI_API'), temperature=1.0)
+  embeddings = OpenAIEmbeddings(model="text-embedding-3-large", api_key=os.getenv('OpenAI_API'))
+  vectorstore = PineconeVectorStore(index_name="sciolyastronomy", embedding=embeddings, pinecone_api_key=os.getenv('PINECONE_API_KEY'))
+  docsearch = vectorstore.from_existing_index(index_name=index, embedding=embeddings)
+
+  class generateTest(BaseModel):
+    question: str = Field(description='''Generate a multiple-choice question for the General Knowledge section 
+                    of Astronomy. ''')
+    options: List[str] = Field(description='''Generate a list of the four answer options to the General Knowledge
+                               Astronomy multiple-choice question. Do not include the letters 
+                               'a, b, c, d' as part of the answer options.''')
+    answer: str = Field(description='''Generate the corresponding answer to the multiple-choice question for
+                    the General Knowledge section of Astrononmy.''')
+  
+  rag_parser = PydanticOutputParser(pydantic_object=generateTest)
+
+  rag_prompt = PromptTemplate(
+    template = '''Based on the dataset of Astronomy General Knowledge multiple choice questions,
+        generate a multiple-choice question of the General Knowledge section of Astronomy. 
+        Generate the corresponding answer to the multiple-choice question.'''
+        '''The output should be formatted a string for the question and a string for the
+        answer based on {format_instructions}'''
+        '''Dataset: \n{context}\n''',
+    partial_variables = {"format_instructions": rag_parser.get_format_instructions()}
+    )
+
+  retriever = docsearch.as_retriever(search_time="mmr", search_kwargs={"k": 10})
+  qa_chain = create_stuff_documents_chain(llm=llm, prompt=rag_prompt)
+  chain = create_retrieval_chain(retriever, qa_chain)
+  response = chain.invoke({'input': f'''Generate a General Knowledge astronomy multiple choice question
+                          in the topic of {subtopic}.'''})
+  
+  return jsonify({"response": str(response['answer'])}), 200
+
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True, port=8080)
+
